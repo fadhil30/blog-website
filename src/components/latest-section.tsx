@@ -52,7 +52,7 @@ export default function LatestSection() {
             <span>March 12, 2024</span>
           </div>
           <h3 className="mt-2 text-2xl font-semibold">
-            Lorem ipsum dolor sit amet, consectetur adipiscing{" "}
+            Lorem ipsum dolor sit amet, consectetur adipiscing
           </h3>
         </div>
       </div>
