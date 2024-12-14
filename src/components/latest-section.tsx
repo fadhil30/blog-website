@@ -1,6 +1,10 @@
+import { getLatestPost } from "@/utils/get-contentful-data";
 import Image from "next/image";
 
-export default function LatestSection() {
+export default async function LatestSection() {
+  const latestPost = await getLatestPost();
+  console.log(latestPost);
+
   return (
     <section className="mt-24 px-12">
       <div className="flex flex-row">

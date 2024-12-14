@@ -31,8 +31,8 @@ export default function NewTechnologySection() {
             />
           </div>
           <div className="flex flex-col">
-            <span>Dasteen</span>
-            <div className="flex flex-row gap-[2px]">
+            <span className="text-base font-semibold">Dasteen</span>
+            <div className="flex flex-row gap-[2px] text-sm font-normal">
               <span>Jan 10, 2024</span>
               <span>•</span>
               <span>3 Min Read</span>
