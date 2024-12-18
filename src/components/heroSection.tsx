@@ -1,7 +1,7 @@
 export default function HeroSection() {
   return (
-    <section className="flex items-center bg-[url('/jdm.jpg')] bg-cover bg-center py-12 text-white">
-      <div className="mt-12 flex w-full flex-col justify-start px-12">
+    <section className="flex items-center bg-[url('/bg911.webp')] bg-cover bg-center py-12 text-white">
+      <div className="mt-16 flex w-full flex-col justify-start px-12">
         <h1 className="w-1/2 text-7xl font-bold text-white">
           Your Journey Your Car Your Way
         </h1>

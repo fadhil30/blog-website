@@ -4,7 +4,7 @@ import HeroSection from "@/components/heroSection";
 import LatestSection from "@/components/latest-section";
 import NewTechnologySection from "@/components/new-technology";
 
-export default function Home() {
+export default async function Home() {
   return (
     <section>
       <HeroSection />
