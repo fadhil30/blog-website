@@ -27,9 +27,7 @@ export default async function NewTechnologySection() {
                 <h4 className="text-lg font-bold text-[#2B2C34]">
                   {item.title as string}
                 </h4>
-                <div className="mt-2 flex w-fit flex-col">
-                  {" "}
-                  {/* Mengubah menjadi kolom */}
+                <div className="mt-8 flex w-fit flex-row gap-4">
                   <div className="relative h-[53px] w-[53px] overflow-hidden rounded-full">
                     <Image
                       src={item.authorImage}
@@ -39,8 +37,6 @@ export default async function NewTechnologySection() {
                     />
                   </div>
                   <div className="mt-1 flex flex-col">
-                    {" "}
-                    {/* Memastikan informasi penulis dalam kolom */}
                     <span className="text-base font-semibold">
                       {item.author as string}
                     </span>

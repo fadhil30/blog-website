@@ -3,6 +3,7 @@ import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { getSingleBlogPost } from "@/utils/get-contentful-data";
 import { BLOCKS } from "@contentful/rich-text-types";
+import AllCategorySection from "@/components/all-category";
 
 export default async function DetailPage({
   params,
@@ -69,7 +70,7 @@ export default async function DetailPage({
           </div>
         </div>
       </div>
-
+      <AllCategorySection />
       <Footer />
     </section>
   );

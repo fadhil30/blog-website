@@ -1,38 +1,61 @@
-import Footer from "@/components/footer";
+"use client";
 import HeroSection from "@/components/heroSection";
-import { getAllBlogPost } from "@/utils/get-contentful-data";
+import { searchPostByTitle } from "@/utils/get-contentful-data";
 import Image from "next/image";
-import Link from "next/link"; // Impor Link dari Next.js
+import Link from "next/link";
+import { useSearchParams } from "next/navigation"; // Menggunakan useSearchParams
+import { useEffect, useState } from "react";
 
-export default async function BlogPage() {
-  const posts = await getAllBlogPost();
+export default function SearchPage() {
+  const searchParams = useSearchParams(); // Dapatkan search params
+  const query = searchParams.get("q"); // Ambil nilai dari parameter q
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchResults = async () => {
+      if (query) {
+        const posts = await searchPostByTitle(query); // Panggil fungsi pencarian
+        setResults(posts);
+      }
+      setLoading(false);
+    };
+
+    fetchResults();
+  }, [query]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <section>
       <HeroSection />
       <div className="px-12">
-        <h1 className="mt-14 text-5xl font-semibold">All Posts</h1>
+        <h1 className="mt-14 text-5xl font-semibold">Search Results</h1>
         <hr className="my-8" />
-        <div>
-          {posts?.map((item) => {
-            return (
+        {results.length === 0 ? (
+          <p>
+            No results found for <strong>{query}</strong>
+          </p>
+        ) : (
+          <ul>
+            {results.map((item) => (
               <div key={item.slug} className="mb-12 flex w-full flex-row">
                 <div className="relative h-[350px] w-full">
                   <Image
-                    src={item.thumbnailImage}
+                    src={item.fields.thumbnailImage}
                     alt="Thumbnail Image"
                     fill
                     className="object-cover"
                   />
                 </div>
                 <div className="px-5">
-                  <h4 className="text-2xl font-bold">
-                    {item?.title as string}
-                  </h4>
+                  <h4 className="text-2xl font-bold">{item.fields.title}</h4>
                   <div className="mt-7 flex w-fit flex-row items-center gap-2">
                     <div className="relative h-[53px] w-[53px] overflow-hidden rounded-full">
                       <Image
-                        src={item.authorImage}
+                        src={item.fields.authorImage}
                         alt="Profile Picture"
                         fill
                         className="object-cover"
@@ -40,14 +63,14 @@ export default async function BlogPage() {
                     </div>
                     <div className="flex flex-col">
                       <span className="text-base font-semibold">
-                        {item?.author as string}
+                        {item?.fields.author as string}
                       </span>
                       <div className="flex flex-row gap-[2px] text-sm font-normal">
-                        <span>{item.date as string}</span>
+                        <span>{item.fields.date as string}</span>
                       </div>
                     </div>
                   </div>
-                  <p className="mt-6">{item.description as string}</p>
+                  <p className="mt-6">{item.fields.description}</p>
                   <Link href={`/blog/${item.slug}`}>
                     <button className="mt-5 w-52 rounded-lg bg-[#FF5959] py-2 text-sm font-bold text-white">
                       Read full article...
@@ -55,11 +78,10 @@ export default async function BlogPage() {
                   </Link>
                 </div>
               </div>
-            );
-          })}
-        </div>
+            ))}
+          </ul>
+        )}
       </div>
-      <Footer />
     </section>
   );
 }

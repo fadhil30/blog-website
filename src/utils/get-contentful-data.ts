@@ -56,13 +56,13 @@ export async function getSingleBlogPost(slug: string) {
       "fields.slug": slug,
     });
 
-    let featuredImageUrl = data.items[0].fields.featuredImage?.fields.file.url;
+    let featuredImageUrl = data.items[0].fields.featuredImage?.fields?.file.url;
 
     if (!featuredImageUrl) {
       featuredImageUrl =
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
     }
-    let authorImageUrl = data.items[0].fields.authorImage?.fields.file.url;
+    let authorImageUrl = data.items[0].fields.authorImage?.fields?.file.url;
     console.log(authorImageUrl);
 
     if (!authorImageUrl) {
@@ -165,6 +165,30 @@ export async function getNewTechnologyPost() {
   }
 }
 
+export async function getCategories() {
+  try {
+    const data = await client.getEntries({ content_type: "categories" });
+
+    return data.items.map((post) => {
+      let categorylUrl = post?.fields?.categorylImage?.fields?.file.url;
+
+      if (!categorylUrl) {
+        categorylUrl =
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
+      }
+
+      return {
+        title: post.fields.title,
+        slug: post.fields.slug,
+        description: post.fields.description,
+        categorylImage: `https:${categorylUrl}`,
+      };
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function searchPost() {}
 
 export async function searchPostByTitle(keyword: string) {
@@ -173,6 +197,7 @@ export async function searchPostByTitle(keyword: string) {
       content_type: "blogPost",
       "fields.title[match]": keyword,
     });
+    return res.items;
   } catch (error) {
     console.error(error);
     return null;
@@ -185,6 +210,7 @@ export async function searchByCategories(keyword: string) {
       content_type: "blogPost",
       "fields.category[match]": keyword,
     });
+    return res.items;
   } catch (error) {
     console.error(error);
     return null;
