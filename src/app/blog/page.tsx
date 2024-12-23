@@ -2,7 +2,7 @@ import Footer from "@/components/footer";
 import HeroSection from "@/components/heroSection";
 import { getAllBlogPost } from "@/utils/get-contentful-data";
 import Image from "next/image";
-import Link from "next/link"; // Impor Link dari Next.js
+import Link from "next/link";
 
 export default async function BlogPage() {
   const posts = await getAllBlogPost();
@@ -10,27 +10,28 @@ export default async function BlogPage() {
   return (
     <section>
       <HeroSection />
-      <div className="px-12">
-        <h1 className="mt-14 text-5xl font-semibold">All Posts</h1>
+      <div className="px-4 md:px-12">
+        <h1 className="mt-14 text-3xl font-semibold md:text-5xl">All Posts</h1>
         <hr className="my-8" />
-        <div>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {posts?.map((item) => {
             return (
-              <div key={item.slug} className="mb-12 flex w-full flex-row">
-                <div className="relative h-[350px] w-full">
+              <div
+                key={item.slug}
+                className="flex flex-col rounded-lg bg-white shadow-lg"
+              >
+                <div className="relative h-[200px] w-full">
                   <Image
                     src={item.thumbnailImage}
                     alt="Thumbnail Image"
                     fill
-                    className="object-cover"
+                    className="rounded-t-lg object-cover"
                   />
                 </div>
-                <div className="px-5">
-                  <h4 className="text-2xl font-bold">
-                    {item?.title as string}
-                  </h4>
-                  <div className="mt-7 flex w-fit flex-row items-center gap-2">
-                    <div className="relative h-[53px] w-[53px] overflow-hidden rounded-full">
+                <div className="flex flex-grow flex-col p-5">
+                  <h4 className="text-xl font-bold">{item?.title as string}</h4>
+                  <div className="mt-3 flex items-center gap-2">
+                    <div className="relative h-[40px] w-[40px] overflow-hidden rounded-full">
                       <Image
                         src={item.authorImage}
                         alt="Profile Picture"
@@ -39,17 +40,19 @@ export default async function BlogPage() {
                       />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-base font-semibold">
+                      <span className="text-sm font-semibold">
                         {item?.author as string}
                       </span>
-                      <div className="flex flex-row gap-[2px] text-sm font-normal">
-                        <span>{item.date as string}</span>
-                      </div>
+                      <span className="text-xs text-gray-500">
+                        {item.date as string}
+                      </span>
                     </div>
                   </div>
-                  <p className="mt-6">{item.description as string}</p>
+                  <p className="mt-4 flex-grow text-sm">
+                    {item.description as string}
+                  </p>
                   <Link href={`/blog/${item.slug}`}>
-                    <button className="mt-5 w-52 rounded-lg bg-[#FF5959] py-2 text-sm font-bold text-white">
+                    <button className="mt-4 w-full rounded-lg bg-[#FF5959] py-2 text-sm font-bold text-white transition hover:bg-[#ff4747]">
                       Read full article...
                     </button>
                   </Link>

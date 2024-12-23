@@ -12,7 +12,7 @@ export default function HeroSection() {
           facilisis consequat pretium. Et faucibus laoreet molestie diam semper
           fames diam eget.
         </p>
-        <button className="mt-5 w-44 rounded-lg bg-[#FF5959] py-2 text-xl font-bold">
+        <button className="mt-5 w-44 rounded-lg bg-[#FF5959] py-2 text-xl font-bold hover:scale-105">
           Subscribe
         </button>
       </div>

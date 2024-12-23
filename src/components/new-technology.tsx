@@ -15,8 +15,8 @@ export default async function NewTechnologySection() {
         {posts?.map((item) => {
           return (
             <Link key={item.slug} href={`/blog/${item.slug}`}>
-              <div className="mt-4 h-auto w-72 rounded-xl bg-[#F4F0F8] p-4">
-                <div className="relative mb-4 h-[150px] w-[250px]">
+              <div className="flex h-full w-60 flex-col rounded-xl bg-[#F4F0F8] p-4 hover:scale-105">
+                <div className="relative mb-4 h-[150px] w-full">
                   <Image
                     src={item.thumbnailImage}
                     alt="Thumbnail Image"
@@ -24,10 +24,10 @@ export default async function NewTechnologySection() {
                     className="overflow-hidden rounded-lg object-cover"
                   />
                 </div>
-                <h4 className="text-lg font-bold text-[#2B2C34]">
+                <h4 className="flex-grow text-lg font-bold text-[#2B2C34]">
                   {item.title as string}
                 </h4>
-                <div className="mt-8 flex w-fit flex-row gap-4">
+                <div className="mt-4 flex w-full flex-grow flex-row justify-center gap-4">
                   <div className="relative h-[53px] w-[53px] overflow-hidden rounded-full">
                     <Image
                       src={item.authorImage}
@@ -36,7 +36,7 @@ export default async function NewTechnologySection() {
                       className="object-cover"
                     />
                   </div>
-                  <div className="mt-1 flex flex-col">
+                  <div className="flex flex-col">
                     <span className="text-base font-semibold">
                       {item.author as string}
                     </span>

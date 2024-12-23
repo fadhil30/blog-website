@@ -24,14 +24,14 @@ export async function getAllBlogPost() {
 
       if (!thumbnailUrl) {
         thumbnailUrl =
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
+          "//encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
       }
       let authorImageUrl = post?.fields?.authorImage?.fields?.file.url;
       console.log(authorImageUrl);
 
       if (!authorImageUrl) {
         authorImageUrl =
-          "https://media.istockphoto.com/id/2041572395/vector/blank-avatar-photo-placeholder-icon-vector-illustration.jpg?s=612x612&w=0&k=20&c=wSuiu-si33m-eiwGhXiX_5DvKQDHNS--CBLcyuy68n0=";
+          "//media.istockphoto.com/id/2041572395/vector/blank-avatar-photo-placeholder-icon-vector-illustration.jpg?s=612x612&w=0&k=20&c=wSuiu-si33m-eiwGhXiX_5DvKQDHNS--CBLcyuy68n0=";
       }
 
       return {
@@ -60,14 +60,14 @@ export async function getSingleBlogPost(slug: string) {
 
     if (!featuredImageUrl) {
       featuredImageUrl =
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
+        "//encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
     }
     let authorImageUrl = data.items[0].fields.authorImage?.fields?.file.url;
     console.log(authorImageUrl);
 
     if (!authorImageUrl) {
       authorImageUrl =
-        "https://media.istockphoto.com/id/2041572395/vector/blank-avatar-photo-placeholder-icon-vector-illustration.jpg?s=612x612&w=0&k=20&c=wSuiu-si33m-eiwGhXiX_5DvKQDHNS--CBLcyuy68n0=";
+        "//media.istockphoto.com/id/2041572395/vector/blank-avatar-photo-placeholder-icon-vector-illustration.jpg?s=612x612&w=0&k=20&c=wSuiu-si33m-eiwGhXiX_5DvKQDHNS--CBLcyuy68n0=";
     }
 
     return {
@@ -94,7 +94,7 @@ export async function getLatestPost() {
 
     if (!featuredImageUrl) {
       featuredImageUrl =
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
+        "//encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
     }
 
     return {
@@ -141,14 +141,14 @@ export async function getNewTechnologyPost() {
 
       if (!thumbnailUrl) {
         thumbnailUrl =
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
+          "//encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
       }
       let authorImageUrl = post?.fields?.authorImage?.fields?.file.url;
       console.log(authorImageUrl);
 
       if (!authorImageUrl) {
         authorImageUrl =
-          "https://media.istockphoto.com/id/2041572395/vector/blank-avatar-photo-placeholder-icon-vector-illustration.jpg?s=612x612&w=0&k=20&c=wSuiu-si33m-eiwGhXiX_5DvKQDHNS--CBLcyuy68n0=";
+          "//media.istockphoto.com/id/2041572395/vector/blank-avatar-photo-placeholder-icon-vector-illustration.jpg?s=612x612&w=0&k=20&c=wSuiu-si33m-eiwGhXiX_5DvKQDHNS--CBLcyuy68n0=";
       }
 
       return {
@@ -170,10 +170,10 @@ export async function getCategories() {
     const data = await client.getEntries({ content_type: "categories" });
 
     return data.items.map((post) => {
-      let categorylUrl = post?.fields?.categorylImage?.fields?.file.url;
+      let categoryUrl = post?.fields?.categorylImage?.fields?.file.url;
 
-      if (!categorylUrl) {
-        categorylUrl =
+      if (!categoryUrl) {
+        categoryUrl =
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
       }
 
@@ -181,7 +181,7 @@ export async function getCategories() {
         title: post.fields.title,
         slug: post.fields.slug,
         description: post.fields.description,
-        categorylImage: `https:${categorylUrl}`,
+        categoryImage: `https:${categoryUrl}`,
       };
     });
   } catch (error) {

@@ -41,10 +41,13 @@ export default function SearchPage() {
         ) : (
           <ul>
             {results.map((item) => (
-              <div key={item.slug} className="mb-12 flex w-full flex-row">
+              <div
+                key={item.fields.slug}
+                className="mb-12 flex w-full flex-row"
+              >
                 <div className="relative h-[350px] w-full">
                   <Image
-                    src={item.fields.thumbnailImage}
+                    src={`https:${item.fields.thumbnailImage.fields.file.url}`}
                     alt="Thumbnail Image"
                     fill
                     className="object-cover"
@@ -55,7 +58,7 @@ export default function SearchPage() {
                   <div className="mt-7 flex w-fit flex-row items-center gap-2">
                     <div className="relative h-[53px] w-[53px] overflow-hidden rounded-full">
                       <Image
-                        src={item.fields.authorImage}
+                        src={`https:${item.fields.authorImage.fields.file.url}`}
                         alt="Profile Picture"
                         fill
                         className="object-cover"
@@ -71,7 +74,7 @@ export default function SearchPage() {
                     </div>
                   </div>
                   <p className="mt-6">{item.fields.description}</p>
-                  <Link href={`/blog/${item.slug}`}>
+                  <Link href={`/blog/${item.fields.slug}`}>
                     <button className="mt-5 w-52 rounded-lg bg-[#FF5959] py-2 text-sm font-bold text-white">
                       Read full article...
                     </button>
