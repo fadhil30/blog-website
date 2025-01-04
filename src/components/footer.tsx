@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 export default function Footer() {
   const [email, setEmail] = useState("");
 
-  // Mengambil data dari local storage saat komponen dimount
   useEffect(() => {
     const storedEmail = localStorage.getItem("subscriberEmail");
     if (storedEmail) {
@@ -15,11 +14,10 @@ export default function Footer() {
   }, []);
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Menghindari refresh halaman
-    // Simpan email ke local storage
+    e.preventDefault();
     localStorage.setItem("subscriberEmail", email);
     console.log({ email });
-    setEmail(""); // Kosongkan input setelah submit
+    setEmail("");
   };
 
   return (
@@ -37,16 +35,36 @@ export default function Footer() {
           </div>
           <ul className="mt-4 flex flex-col justify-end gap-4 md:mt-0 md:flex-row">
             <li>
-              <Link href="/">Home</Link>
+              <Link
+                href="/"
+                className="transform text-base font-medium text-white transition duration-200 ease-in-out hover:scale-110 hover:underline"
+              >
+                Home
+              </Link>
             </li>
             <li>
-              <Link href="/blog">Blogs</Link>
+              <Link
+                href="/blog"
+                className="transform text-base font-medium text-white transition duration-200 ease-in-out hover:scale-110 hover:underline"
+              >
+                Blogs
+              </Link>
             </li>
             <li>
-              <Link href="/about">About</Link>
+              <Link
+                href="/about"
+                className="transform text-base font-medium text-white transition duration-200 ease-in-out hover:scale-110 hover:underline"
+              >
+                About
+              </Link>
             </li>
             <li>
-              <Link href="/contact">Contact Us</Link>
+              <Link
+                href="/contact"
+                className="transform text-base font-medium text-white transition duration-200 ease-in-out hover:scale-110 hover:underline"
+              >
+                Contact Us
+              </Link>
             </li>
           </ul>
         </div>
@@ -55,7 +73,7 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between gap-4 bg-[#2A2B39] px-8 py-4 md:flex-row">
           <div className="w-full md:w-2/4">
             <h1 className="text-center text-2xl font-bold text-white md:text-left md:text-4xl">
-              Subscribe to our newsletter to get the latest updates and news
+              Subscribe to our newsletter to get the latest updates
             </h1>
           </div>
           <div className="flex">

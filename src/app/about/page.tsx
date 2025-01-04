@@ -1,12 +1,12 @@
-import Footer from "@/components/footer";
-
 export default function AboutPage() {
   return (
-    <section>
+    <section className="min-h-screen">
       <div className="flex items-center bg-[url('/about-bg.webp')] bg-cover bg-center py-12 text-white">
-        <div className="mt-16 flex w-full flex-col justify-start px-12">
-          <h1 className="w-1/2 text-7xl font-bold text-white">About Us</h1>
-          <p className="mt-5 w-1/2 text-lg font-medium">
+        <div className="mt-16 flex w-full flex-col justify-start px-6 md:px-12">
+          <h1 className="text-4xl font-bold text-white md:text-7xl">
+            About Us
+          </h1>
+          <p className="mt-5 w-1/2 text-base font-medium md:text-lg">
             Lorem ipsum dolor sit amet consectetur. Diam volutpat morbi
             elementum vel euismod aliquam. Amet ultrices neque augue consectetur
             purus phasellus. Ullamcorper lorem montes varius amet vestibulum
@@ -15,13 +15,13 @@ export default function AboutPage() {
           </p>
         </div>
       </div>
-      <div className="px-12">
-        <div className="mt-14 flex flex-row px-20">
-          <h2 className="m-auto w-1/2 items-center text-3xl font-semibold text-[#232536]">
+      <div className="px-4 md:px-12">
+        <div className="mt-14 flex flex-col px-4 md:flex-row md:px-20">
+          <h2 className="m-auto w-full text-center text-2xl font-semibold text-[#232536] md:w-1/2 md:text-left md:text-3xl">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
             voluptas ducimus officiis deleniti distinctio totam
           </h2>
-          <p className="w-1/2 text-base">
+          <p className="mt-4 w-full text-base md:mt-0 md:w-1/2">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro
             minima cupiditate sunt aliquid doloribus optio accusamus ipsa in,
             non ea asperiores sed perferendis quae beatae quo, officiis fuga nam
@@ -47,7 +47,6 @@ export default function AboutPage() {
           </p>
         </div>
       </div>
-      <Footer />
     </section>
   );
 }

@@ -1,4 +1,3 @@
-import Footer from "@/components/footer";
 import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { getSingleBlogPost } from "@/utils/get-contentful-data";
@@ -46,7 +45,7 @@ export default async function DetailPage({
             </div>
           </div>
           <div className="px-36">
-            {documentToReactComponents(post.content, {
+            {documentToReactComponents(post?.content, {
               renderNode: {
                 [BLOCKS.HEADING_2]: (node, children) => {
                   return (
@@ -71,7 +70,6 @@ export default async function DetailPage({
         </div>
       </div>
       <AllCategorySection />
-      <Footer />
     </section>
   );
 }

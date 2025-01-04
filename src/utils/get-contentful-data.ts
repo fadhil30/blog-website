@@ -2,7 +2,7 @@ import * as contentful from "contentful";
 
 const client = contentful.createClient({
   space: "xi790hf9mml3",
-  environment: "master", // defaults to 'master' if not set
+  environment: "master",
   accessToken: "B1clAu02__fWaYpVJ4_FNz1Pt-jk2oXCz3jbb0oo1YA",
 });
 
@@ -12,12 +12,23 @@ export async function getAllEntries() {
     return data;
   } catch (error) {
     console.error(error);
+    return null;
   }
 }
 
-export async function getAllBlogPost() {
+export async function getAllBlogPost({
+  field_slug,
+  field_categories,
+}: {
+  field_slug?: string;
+  field_categories?: string;
+}) {
   try {
-    const data = await client.getEntries({ content_type: "blogPost" });
+    const data = await client.getEntries({
+      content_type: "blogPost",
+      "fields.slug": field_slug,
+      "fields.categories": field_categories,
+    });
 
     return data.items.map((post) => {
       let thumbnailUrl = post?.fields?.thumbnailImage?.fields?.file.url;
@@ -27,7 +38,6 @@ export async function getAllBlogPost() {
           "//encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
       }
       let authorImageUrl = post?.fields?.authorImage?.fields?.file.url;
-      console.log(authorImageUrl);
 
       if (!authorImageUrl) {
         authorImageUrl =
@@ -42,6 +52,7 @@ export async function getAllBlogPost() {
         authorImage: `https:${authorImageUrl}`,
         description: post.fields.description,
         thumbnailImage: `https:${thumbnailUrl}`,
+        categories: post.fields.categories,
       };
     });
   } catch (error) {
@@ -63,7 +74,6 @@ export async function getSingleBlogPost(slug: string) {
         "//encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
     }
     let authorImageUrl = data.items[0].fields.authorImage?.fields?.file.url;
-    console.log(authorImageUrl);
 
     if (!authorImageUrl) {
       authorImageUrl =
@@ -111,11 +121,9 @@ export async function getLatestPost() {
 }
 
 export async function getTrendingPost(limit = Infinity) {
-  // Tambahkan parameter limit dengan default ke Infinity
   try {
     const data = await client.getEntries({ content_type: "blogPost" });
 
-    // Mengambil dan memetakan data postingan
     return data.items
       .map((post) => {
         return {
@@ -125,10 +133,10 @@ export async function getTrendingPost(limit = Infinity) {
           author: post.fields.author,
         };
       })
-      .slice(0, limit); // Memotong array sesuai dengan limit
+      .slice(0, limit);
   } catch (error) {
     console.error(error);
-    return []; // Mengembalikan array kosong jika terjadi kesalahan
+    return [];
   }
 }
 
@@ -144,7 +152,6 @@ export async function getNewTechnologyPost() {
           "//encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
       }
       let authorImageUrl = post?.fields?.authorImage?.fields?.file.url;
-      console.log(authorImageUrl);
 
       if (!authorImageUrl) {
         authorImageUrl =
@@ -170,11 +177,11 @@ export async function getCategories() {
     const data = await client.getEntries({ content_type: "categories" });
 
     return data.items.map((post) => {
-      let categoryUrl = post?.fields?.categorylImage?.fields?.file.url;
+      let categoryUrl = post?.fields?.categoryImage?.fields?.file.url;
 
       if (!categoryUrl) {
         categoryUrl =
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
+          "//encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvhge7wZOe_kpjSlMJmtAvSIvgGqfqD3Pmeg&s";
       }
 
       return {
@@ -189,26 +196,11 @@ export async function getCategories() {
   }
 }
 
-export async function searchPost() {}
-
 export async function searchPostByTitle(keyword: string) {
   try {
     const res = await client.getEntries({
       content_type: "blogPost",
       "fields.title[match]": keyword,
-    });
-    return res.items;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-}
-
-export async function searchByCategories(keyword: string) {
-  try {
-    const res = await client.getEntries({
-      content_type: "blogPost",
-      "fields.category[match]": keyword,
     });
     return res.items;
   } catch (error) {

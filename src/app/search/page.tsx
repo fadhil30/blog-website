@@ -3,19 +3,19 @@ import HeroSection from "@/components/heroSection";
 import { searchPostByTitle } from "@/utils/get-contentful-data";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation"; // Menggunakan useSearchParams
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function SearchPage() {
-  const searchParams = useSearchParams(); // Dapatkan search params
-  const query = searchParams.get("q"); // Ambil nilai dari parameter q
+  const searchParams = useSearchParams();
+  const query = searchParams.get("q");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchResults = async () => {
       if (query) {
-        const posts = await searchPostByTitle(query); // Panggil fungsi pencarian
+        const posts = await searchPostByTitle(query);
         setResults(posts);
       }
       setLoading(false);
@@ -29,7 +29,7 @@ export default function SearchPage() {
   }
 
   return (
-    <section>
+    <section className="min-h-screen">
       <HeroSection />
       <div className="px-12">
         <h1 className="mt-14 text-5xl font-semibold">Search Results</h1>

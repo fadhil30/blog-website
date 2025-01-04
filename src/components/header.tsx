@@ -31,8 +31,7 @@ export default function Header() {
   return (
     <nav className="fixed z-10 w-full bg-[#232536] px-4 py-4 md:px-12">
       <div className="flex h-12 items-center justify-between">
-        {/* Logo */}
-        <div className="w-[120px] font-bold text-gray-600">
+        <div className="w-[120px]">
           <Link href="/">
             <Image
               src="/faithco-logo.svg"
@@ -43,13 +42,9 @@ export default function Header() {
             />
           </Link>
         </div>
-
-        {/* Hamburger Menu for Mobile */}
         <button className="text-2xl text-white md:hidden" onClick={toggleMenu}>
           {isOpen ? "✖" : "☰"}
         </button>
-
-        {/* Navigation Links */}
         <ul
           className={`${
             isOpen ? "block" : "hidden"
@@ -69,7 +64,7 @@ export default function Header() {
           <li className="border-b border-gray-300 pb-4 md:border-none md:pb-0">
             <Link
               href="/"
-              className="text-base font-medium text-white hover:text-gray-300"
+              className="transform text-base font-medium text-white transition duration-200 ease-in-out hover:scale-110 hover:underline"
             >
               Home
             </Link>
@@ -77,7 +72,7 @@ export default function Header() {
           <li className="border-b border-gray-300 pb-4 md:border-none md:pb-0">
             <Link
               href="/blog"
-              className="text-base font-medium text-white hover:text-gray-300"
+              className="transform text-base font-medium text-white transition duration-200 ease-in-out hover:scale-110 hover:underline"
             >
               Blogs
             </Link>
@@ -85,7 +80,7 @@ export default function Header() {
           <li className="border-b border-gray-300 pb-4 md:border-none md:pb-0">
             <Link
               href="/about"
-              className="text-base font-medium text-white hover:text-gray-300"
+              className="transform text-base font-medium text-white transition duration-200 ease-in-out hover:scale-110 hover:underline"
             >
               About
             </Link>
@@ -93,7 +88,7 @@ export default function Header() {
           <li className="border-b border-gray-300 pb-4 md:border-none md:pb-0">
             <Link
               href="/contact"
-              className="text-base font-medium text-white hover:text-gray-300"
+              className="transform text-base font-medium text-white transition duration-200 ease-in-out hover:scale-110 hover:underline"
             >
               Contact Us
             </Link>

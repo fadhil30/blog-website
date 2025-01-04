@@ -1,11 +1,10 @@
-import Footer from "@/components/footer";
 import HeroSection from "@/components/heroSection";
 import { getAllBlogPost } from "@/utils/get-contentful-data";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function BlogPage() {
-  const posts = await getAllBlogPost();
+  const posts = await getAllBlogPost({});
 
   return (
     <section>
@@ -17,21 +16,21 @@ export default async function BlogPage() {
           {posts?.map((item) => {
             return (
               <div
-                key={item.slug}
+                key={item.slug as string}
                 className="flex flex-col rounded-lg bg-white shadow-lg"
               >
-                <div className="relative h-[200px] w-full">
+                <div className="relative h-[350px] w-full">
                   <Image
                     src={item.thumbnailImage}
                     alt="Thumbnail Image"
                     fill
-                    className="rounded-t-lg object-cover"
+                    className="rounded-lg object-cover"
                   />
                 </div>
                 <div className="flex flex-grow flex-col p-5">
                   <h4 className="text-xl font-bold">{item?.title as string}</h4>
                   <div className="mt-3 flex items-center gap-2">
-                    <div className="relative h-[40px] w-[40px] overflow-hidden rounded-full">
+                    <div className="relative h-[50px] w-[50px] overflow-hidden rounded-full">
                       <Image
                         src={item.authorImage}
                         alt="Profile Picture"
@@ -43,16 +42,16 @@ export default async function BlogPage() {
                       <span className="text-sm font-semibold">
                         {item?.author as string}
                       </span>
-                      <span className="text-xs text-gray-500">
+                      <span className="text-sm text-gray-500">
                         {item.date as string}
                       </span>
                     </div>
                   </div>
-                  <p className="mt-4 flex-grow text-sm">
+                  <p className="mt-4 flex-grow text-base">
                     {item.description as string}
                   </p>
                   <Link href={`/blog/${item.slug}`}>
-                    <button className="mt-4 w-full rounded-lg bg-[#FF5959] py-2 text-sm font-bold text-white transition hover:bg-[#ff4747]">
+                    <button className="mt-4 w-full rounded-lg bg-[#FF5959] py-2 text-sm font-bold text-white transition hover:scale-105">
                       Read full article...
                     </button>
                   </Link>
@@ -62,7 +61,6 @@ export default async function BlogPage() {
           })}
         </div>
       </div>
-      <Footer />
     </section>
   );
 }

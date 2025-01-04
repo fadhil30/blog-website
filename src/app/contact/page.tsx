@@ -10,7 +10,7 @@ export default function ContactPage() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    const storedData = localStorage.getItem("contactData");
+    const storedData = sessionStorage.getItem("contactData");
     if (storedData) {
       const { name, phone, email, message } = JSON.parse(storedData);
       setName(name);
@@ -23,7 +23,7 @@ export default function ContactPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const contactData = { name, phone, email, message };
-    localStorage.setItem("contactData", JSON.stringify(contactData));
+    sessionStorage.setItem("contactData", JSON.stringify(contactData));
     console.log({ name, phone, email, message });
     setName("");
     setPhone("");
@@ -32,7 +32,7 @@ export default function ContactPage() {
   };
 
   return (
-    <section>
+    <section className="min-h-screen">
       <div className="flex items-center bg-[url('/contact-bg.webp')] bg-cover bg-center py-12 text-white">
         <div className="mt-16 flex w-full flex-col justify-start px-6 md:px-12">
           <h1 className="text-4xl font-bold md:text-7xl">Contact Us</h1>
@@ -93,7 +93,6 @@ export default function ContactPage() {
           </button>
         </form>
       </div>
-      <Footer />
     </section>
   );
 }
