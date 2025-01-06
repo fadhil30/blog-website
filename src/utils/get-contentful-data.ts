@@ -3,7 +3,7 @@ import * as contentful from "contentful";
 interface ContentfulImage {
   fields: { file: { url: string } };
 }
-interface Post {
+export interface Post {
   fields: {
     authorImage: ContentfulImage;
     thumbnailImage: ContentfulImage;

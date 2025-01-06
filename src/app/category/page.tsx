@@ -14,14 +14,11 @@ export default async function CategoryBlog() {
           All Categories
         </h1>
         <hr className="mt-8" />
-        <div className="flex flex-col">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {categories?.map((category) => {
             return (
-              <div
-                key={category.slug as string}
-                className="mt-10 flex flex-row"
-              >
-                <div className="relative h-[350px] w-[450px]">
+              <div key={category.slug as string} className="flex flex-col">
+                <div className="relative h-56 w-full md:h-72 lg:h-80">
                   <Image
                     src={category.categoryImage}
                     alt="Category Image"
@@ -33,7 +30,7 @@ export default async function CategoryBlog() {
                   <h4 className="text-xl font-bold">
                     {category.title as string}
                   </h4>
-                  <p className="mt-4 flex-grow text-sm">
+                  <p className="mt-2 flex-grow text-sm">
                     {category.description as string}
                   </p>
                   <Link

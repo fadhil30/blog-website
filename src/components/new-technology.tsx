@@ -9,9 +9,14 @@ export default async function NewTechnologySection() {
     <section className="mt-14 px-4 md:px-12">
       <div className="mb-4 flex flex-col items-center justify-between md:flex-row">
         <h3 className="text-2xl font-bold">New Technology</h3>
-        <span className="cursor-pointer text-base font-medium hover:underline">
-          See all
-        </span>
+        <Link
+          href={"/blog"}
+          className="cursor-pointer text-base font-medium hover:underline"
+        >
+          <span className="cursor-pointer text-base font-medium hover:underline">
+            See all
+          </span>
+        </Link>
       </div>
       <div className="scrollbar-hide mt-4 flex flex-row gap-5 overflow-x-auto">
         {posts?.slice(0, 4)?.map((item) => (
