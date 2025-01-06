@@ -89,16 +89,20 @@ function SearchResults({ query }: { query: string | null }) {
   );
 }
 
-export default function SearchPage() {
+function SearchContent() {
   const searchParams = useSearchParams();
   const query = searchParams.get("q");
 
   return (
-    <Suspense fallback={<Loading />}>
-      <section className="min-h-screen">
-        <HeroSection />
-        <SearchResults query={query} />
-      </section>
-    </Suspense>
+    <section className="min-h-screen">
+      <HeroSection />
+      <SearchResults query={query} />
+    </section>
   );
+}
+
+export default function SearchPage() {
+  <Suspense fallback={<Loading />}>
+    <SearchContent />
+  </Suspense>;
 }
