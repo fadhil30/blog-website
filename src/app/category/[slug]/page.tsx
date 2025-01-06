@@ -27,7 +27,7 @@ export default async function categoriesSlugPage({
             return (
               <article key={post.slug as string} className="mt-10">
                 <div className="flex flex-row">
-                  <div className="relative h-[350px] w-[450px]">
+                  <div className="relative h-[350px] w-[500px]">
                     <Image
                       src={post.thumbnailImage}
                       alt="Blog Image"

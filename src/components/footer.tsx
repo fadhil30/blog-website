@@ -13,7 +13,7 @@ export default function Footer() {
     }
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     localStorage.setItem("subscriberEmail", email);
     console.log({ email });

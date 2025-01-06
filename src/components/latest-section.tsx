@@ -17,6 +17,7 @@ export default async function LatestSection() {
                 src={post?.featuredImage as string}
                 alt=""
                 fill
+                sizes=""
                 className="rounded-lg object-cover"
               />
             </div>
@@ -47,7 +48,7 @@ export default async function LatestSection() {
           {trendingPost.map((item) => {
             return (
               <Link
-                key={item.slug}
+                key={item.slug as string}
                 href={`/blog/${item.slug}`}
                 className="group block"
               >

@@ -1,5 +1,50 @@
 import * as contentful from "contentful";
 
+interface ContentfulImage {
+  fields: { file: { url: string } };
+}
+interface Post {
+  fields: {
+    authorImage: ContentfulImage;
+    thumbnailImage: ContentfulImage;
+    title: string;
+    slug: string;
+    date: string;
+    author: string;
+    description: string;
+    categories: { fields: {
+      slug: string; title: string 
+} }[];
+  };
+}
+
+interface Category {
+  fields: {
+    categoryImage: ContentfulImage;
+    title: string;
+    slug: string;
+    description: string;
+  };
+}
+
+interface SinglePost {
+  items: [
+    {
+      fields: {
+        title: string;
+        slug: string;
+        date: string;
+        author: string;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        content: any;
+        description: string;
+        featuredImage: ContentfulImage;
+        authorImage: ContentfulImage;
+      };
+    },
+  ];
+}
+
 const client = contentful.createClient({
   space: "xi790hf9mml3",
   environment: "master",
@@ -24,13 +69,12 @@ export async function getAllBlogPost({
   field_categories?: string;
 }) {
   try {
-    const data = await client.getEntries({
+    const data = (await client.getEntries({
       content_type: "blogPost",
       "fields.slug": field_slug,
       "fields.categories": field_categories,
-    });
-
-    return data.items.map((post) => {
+    })) as unknown as { items: [] };
+    return data.items.map((post: Post) => {
       let thumbnailUrl = post?.fields?.thumbnailImage?.fields?.file.url;
 
       if (!thumbnailUrl) {
@@ -43,7 +87,6 @@ export async function getAllBlogPost({
         authorImageUrl =
           "//media.istockphoto.com/id/2041572395/vector/blank-avatar-photo-placeholder-icon-vector-illustration.jpg?s=612x612&w=0&k=20&c=wSuiu-si33m-eiwGhXiX_5DvKQDHNS--CBLcyuy68n0=";
       }
-
       return {
         title: post.fields.title,
         slug: post.fields.slug,
@@ -62,10 +105,10 @@ export async function getAllBlogPost({
 
 export async function getSingleBlogPost(slug: string) {
   try {
-    const data = await client.getEntries({
+    const data = (await client.getEntries({
       content_type: "blogPost",
       "fields.slug": slug,
-    });
+    })) as unknown as SinglePost;
 
     let featuredImageUrl = data.items[0].fields.featuredImage?.fields?.file.url;
 
@@ -96,9 +139,9 @@ export async function getSingleBlogPost(slug: string) {
 
 export async function getLatestPost() {
   try {
-    const data = await client.getEntries({
+    const data = (await client.getEntries({
       content_type: "blogPost",
-    });
+    })) as unknown as SinglePost;
 
     let featuredImageUrl = data.items[0].fields.featuredImage?.fields.file.url;
 
@@ -142,9 +185,10 @@ export async function getTrendingPost(limit = Infinity) {
 
 export async function getNewTechnologyPost() {
   try {
-    const data = await client.getEntries({ content_type: "blogPost" });
-
-    return data.items.map((post) => {
+    const data = (await client.getEntries({
+      content_type: "blogPost",
+    })) as unknown as { items: [] };
+    return data.items.map((post: Post) => {
       let thumbnailUrl = post?.fields?.thumbnailImage?.fields?.file.url;
 
       if (!thumbnailUrl) {
@@ -174,9 +218,11 @@ export async function getNewTechnologyPost() {
 
 export async function getCategories() {
   try {
-    const data = await client.getEntries({ content_type: "categories" });
+    const data = (await client.getEntries({
+      content_type: "categories",
+    })) as unknown as { items: [] };
 
-    return data.items.map((post) => {
+    return data.items.map((post: Category) => {
       let categoryUrl = post?.fields?.categoryImage?.fields?.file.url;
 
       if (!categoryUrl) {

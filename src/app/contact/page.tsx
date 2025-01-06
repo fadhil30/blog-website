@@ -1,6 +1,5 @@
 "use client";
 
-import Footer from "@/components/footer";
 import { useEffect, useState } from "react";
 
 export default function ContactPage() {
@@ -20,7 +19,7 @@ export default function ContactPage() {
     }
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const contactData = { name, phone, email, message };
     sessionStorage.setItem("contactData", JSON.stringify(contactData));
