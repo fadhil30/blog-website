@@ -17,7 +17,7 @@ export default function SearchPage() {
     const fetchResults = async () => {
       if (query) {
         const posts = await searchPostByTitle(query);
-        setResults(posts || []); // Menangani hasil null
+        setResults(posts || []);
       }
       setLoading(false);
     };
