@@ -14,6 +14,10 @@ export default function Header() {
     setIsOpen(!isOpen);
   };
 
+  const handleLinkClick = () => {
+    setIsOpen(false);
+  };
+
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -64,6 +68,7 @@ export default function Header() {
           <li className="border-b border-gray-300 pb-4 md:border-none md:pb-0">
             <Link
               href="/"
+              onClick={handleLinkClick}
               className="transform text-base font-medium text-white transition duration-200 ease-in-out hover:scale-110 hover:underline"
             >
               Home
@@ -72,6 +77,7 @@ export default function Header() {
           <li className="border-b border-gray-300 pb-4 md:border-none md:pb-0">
             <Link
               href="/blog"
+              onClick={handleLinkClick}
               className="transform text-base font-medium text-white transition duration-200 ease-in-out hover:scale-110 hover:underline"
             >
               Blogs
@@ -80,6 +86,7 @@ export default function Header() {
           <li className="border-b border-gray-300 pb-4 md:border-none md:pb-0">
             <Link
               href="/about"
+              onClick={handleLinkClick}
               className="transform text-base font-medium text-white transition duration-200 ease-in-out hover:scale-110 hover:underline"
             >
               About
@@ -88,6 +95,7 @@ export default function Header() {
           <li className="border-b border-gray-300 pb-4 md:border-none md:pb-0">
             <Link
               href="/contact"
+              onClick={handleLinkClick}
               className="transform text-base font-medium text-white transition duration-200 ease-in-out hover:scale-110 hover:underline"
             >
               Contact Us
