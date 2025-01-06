@@ -33,7 +33,7 @@ export default async function NewTechnologySection() {
               <h4 className="text-lg font-bold text-[#2B2C34]">
                 {item.title as string}
               </h4>
-              <div className="mt-4 flex items-center gap-4">
+              <div className="mt-4 flex flex-grow items-center gap-2">
                 <div className="relative h-[53px] w-[53px] overflow-hidden rounded-full">
                   <Image
                     src={item.authorImage}
