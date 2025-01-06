@@ -20,9 +20,7 @@ export default function Header() {
 
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     router.push(`/search?q=${search}`);
-
     const postsByTitle = await searchPostByTitle(search);
     if (postsByTitle) {
       console.log("Posts by title: ", postsByTitle);
@@ -52,7 +50,7 @@ export default function Header() {
         <ul
           className={`${
             isOpen ? "block" : "hidden"
-          } absolute left-0 top-16 w-full bg-[#232536] px-6 py-6 transition-all md:relative md:top-0 md:flex md:w-auto md:items-center md:gap-6 md:px-0 md:py-0 md:pl-0`}
+          } absolute left-0 top-16 w-full bg-[#232536] px-6 py-6 transition-all md:relative md:top-0 md:flex md:w-auto md:items-center md:gap-6 md:px-0 md:py-0`}
         >
           <li>
             <form onSubmit={handleSearch} className="flex">
