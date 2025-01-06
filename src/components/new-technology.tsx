@@ -5,6 +5,8 @@ import Link from "next/link";
 export default async function NewTechnologySection() {
   const posts = await getNewTechnologyPost();
 
+  const itemSize = "h-[350px] w-[330px]";
+
   return (
     <section className="mt-14 px-4 md:px-12">
       <div className="mb-4 flex flex-col items-center justify-between md:flex-row">
@@ -13,15 +15,15 @@ export default async function NewTechnologySection() {
           href={"/blog"}
           className="cursor-pointer text-base font-medium hover:underline"
         >
-          <span className="cursor-pointer text-base font-medium hover:underline">
-            See all
-          </span>
+          See all
         </Link>
       </div>
-      <div className="scrollbar-hide mt-4 flex flex-row gap-5 overflow-x-auto">
+      <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {posts?.slice(0, 4)?.map((item) => (
-          <Link key={item.slug as string} href={`/blog/${item.slug}`}>
-            <div className="flex h-[350px] w-[380px] flex-col rounded-xl bg-[#F4F0F8] p-4 transition-transform duration-200 hover:scale-105">
+          <Link key={item.slug} href={`/blog/${item.slug}`}>
+            <div
+              className={`flex flex-col rounded-xl bg-[#F4F0F8] p-4 transition-transform duration-200 hover:scale-105 ${itemSize}`}
+            >
               <div className="relative mb-4 h-[150px] w-full">
                 <Image
                   src={item.thumbnailImage}
@@ -30,10 +32,8 @@ export default async function NewTechnologySection() {
                   className="overflow-hidden rounded-lg object-cover"
                 />
               </div>
-              <h4 className="text-lg font-bold text-[#2B2C34]">
-                {item.title as string}
-              </h4>
-              <div className="mt-4 flex flex-grow items-center gap-2">
+              <h4 className="text-lg font-bold text-[#2B2C34]">{item.title}</h4>
+              <div className="mt-auto flex items-center gap-4">
                 <div className="relative h-[53px] w-[53px] overflow-hidden rounded-full">
                   <Image
                     src={item.authorImage}
@@ -43,12 +43,8 @@ export default async function NewTechnologySection() {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-base font-semibold">
-                    {item.author as string}
-                  </span>
-                  <span className="text-sm font-normal">
-                    {item.date as string}
-                  </span>
+                  <span className="text-base font-semibold">{item.author}</span>
+                  <span className="text-sm font-normal">{item.date}</span>
                 </div>
               </div>
             </div>
